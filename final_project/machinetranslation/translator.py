@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-apikey=os.environ["apikey"]
-url=os.environ["url"]
+apikey = os.environ["apikey"]
+url = os.environ["url"]
 
 authenticator = IAMAuthenticator(apikey)
 language_translator = LanguageTranslatorV3(
@@ -18,18 +18,20 @@ language_translator = LanguageTranslatorV3(
 
 language_translator.set_service_url(url)
 
+
 def english_to_french(english_text):
     """Function to translate English to French"""
     translation = language_translator.translate(
         text=english_text,
-        model_id = "en-fr").get_result()
+        model_id="en-fr").get_result()
     french_text = json.dumps(translation, indent=2, ensure_ascii=False)
     return french_text
+
 
 def french_to_english(french_text):
     """Function to translate French to English"""
     translation = language_translator.translate(
         text=french_text,
-        model_id = "fr-en").get_result()
+        model_id="fr-en").get_result()
     english_text = json.dumps(translation, indent=2, ensure_ascii=False)
     return english_text
